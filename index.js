@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const routerApi = require('./routes');
 
+const { checkApiKey } = require('./middlewares/auth.handler');
 const { logErrors, errorHandler, boomErrorHandler, omrErrorHandler } = require('./middlewares/error.handler');
 
 const app = express();
@@ -27,12 +28,16 @@ app.get('/', (req, res) => {
   res.send('Hola mi server en express');
 });
 
-app.get('/nueva-ruta', (req, res) => {
+//Agregue un checkApiKey para validar
+//los ingresos a ciertos endpoints.
+//Uso de middlewares, que grande papa
+app.get('/nueva-ruta', checkApiKey ,(req, res) => {
   res.send('Hola, soy una nueva ruta');
 });
 
 routerApi(app);
 
+app.use(checkApiKey);
 app.use(logErrors);
 app.use(boomErrorHandler);
 app.use(omrErrorHandler);
