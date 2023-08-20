@@ -1,4 +1,6 @@
 const boom = require('@hapi/boom');
+const bcrypt = require('bcrypt');
+
 
 
 const { models } = require('../lib/sequelize');
@@ -6,20 +8,30 @@ const { models } = require('../lib/sequelize');
 
 
 class CustomerService {
-  constructor() {}
+  constructor() { }
 
 
-  async create(body) {
-    //Le digo que cree un usuario nuevo, con la informacion que
-    //esta en body.user
-    // const newUser = await models.User.create(body.user)
-    // const newCustomer = await models.Customer.create({
-    //   ...body,
-    //   userId: newUser.id,
-    // });
-    const newCustomer = await models.Customer.create(body, {
-        include: ['user'],
-      });
+  async create(data) {
+    /**
+     * Clono el objeto y luego modifico el password hasheado.
+     * luego le envio el clon a la nueva fila de la bd
+     */
+    const passHash = await bcrypt.hash(data.user.password, 10);
+    const cloneCustomer = {
+      ...data,
+      user: {
+        ...data.user,
+        password: passHash
+      },
+    };
+    const newCustomer = await models.Customer.create(cloneCustomer, {
+      include: ['user'],
+    });
+
+    /**
+     * Elimino el password en la devolucion de datos
+     */
+    delete newCustomer.user.dataValues.password;
     return newCustomer;
   };
 
@@ -36,7 +48,7 @@ class CustomerService {
 
   async findOne(id) {
     const customerFind = await models.Customer.findByPk(id);
-    if(!user){
+    if (!user) {
       throw boom.notFound("Customer not found");
     }
     return customerFind;

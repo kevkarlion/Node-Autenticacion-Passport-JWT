@@ -1,4 +1,6 @@
 const boom = require('@hapi/boom');
+const bcrypt = require('bcrypt');
+
 
 // const getConnection = require('../lib/postgres');
 
@@ -21,7 +23,12 @@ class UserService {
 
 
   async create(body) {
-    const newUser = await models.User.create(body);
+    const passHash = await bcrypt.hash(body.password, 10);
+    const newUser = await models.User.create({
+      ...body,
+      password: passHash,
+    });
+    delete newUser.dataValues.password;
     return newUser;
   };
 

@@ -361,3 +361,32 @@ Recuerda que las opciones específicas del dialecto pueden variar según la base
 
 
 //--
+
+
+
+
+
+//-- Autenticacion y Autorizacion Curso 2/3 de Node
+
+  Middleware de verificación
+
+Creo el primer middleware para corroborar que el apiKey sea correcto.
+Uso de variables de entorno.
+
+
+//--
+
+
+//-- Clase 5 Hashing de contraseñas con bcryptjs
+
+Instalo npm i bcrypt. 
+Es una herramienta para poder encriptar y generar hash de contrasenias.
+
+Luego creo 2 funciones, una que encripte, y luego otra que compare
+la encriptacion con el pass. Esto retorna un true o un false.
+Lestoo...
+
+
+//--
+
+

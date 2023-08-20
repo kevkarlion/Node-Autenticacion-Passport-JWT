@@ -30,7 +30,7 @@ const ProductsSchema = {
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'create_at',
+    field: 'created_at',
     defaultValue: Sequelize.NOW
   },
   //Declaro el campo que estara vinculado a otra tabla

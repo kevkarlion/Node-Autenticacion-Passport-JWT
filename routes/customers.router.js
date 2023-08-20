@@ -33,8 +33,8 @@ router.post('/',
   validatorHandler(createCustomerSchema, 'body'),
   async (req, res, next) => {
     try {
-      const body = req.body;
-      const newCustomer = await service.create(body);
+      const data = req.body;
+      const newCustomer = await service.create(data);
       res.status(201).json(newCustomer);
     } catch (error) {
       next(error);
