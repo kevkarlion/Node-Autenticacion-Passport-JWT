@@ -24,6 +24,8 @@ class UserService {
 
   async create(body) {
     const passHash = await bcrypt.hash(body.password, 10);
+
+    //hago el clon de los datos para modificarlo.
     const newUser = await models.User.create({
       ...body,
       password: passHash,
@@ -50,8 +52,17 @@ class UserService {
     const rta = await models.User.findAll({
       include: ['customer'],
     });
-
     // const rta = await client.query('SELECT * FROM tasks');
+    return rta;
+  }
+
+  async findByEmail( email ) {
+    //le indico al findOne, que
+    //busque la fila que contenga el
+    //email indicado, con el where
+    const rta = await models.User.findOne({
+      where: { email }
+    });
     return rta;
   }
 
