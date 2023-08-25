@@ -56,8 +56,8 @@ class UserService {
     return rta;
   }
 
-  async findByEmail( email ) {
-    //le indico al findOne, que
+  async findByEmail(email) {
+    //le indico a findOne, que
     //busque la fila que contenga el
     //email indicado, con el where
     const rta = await models.User.findOne({
