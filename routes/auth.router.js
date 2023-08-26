@@ -2,7 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const { config } = require('./../config/config');
+const { config } = require('../config/config');
 
 router.post('/login',
   /**
@@ -20,7 +20,7 @@ router.post('/login',
         sub: user.id,
         role: user.role
       }
-      const token = jwt.sign(payload, config.jetSecret);
+      const token = jwt.sign(payload, config.jwtSecret);
       res.json({
         user,
         token

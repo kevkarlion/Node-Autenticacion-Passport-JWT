@@ -401,3 +401,38 @@ Se envia el token al cliente y este espera el retorno del token para verificar l
 
 
 //--
+
+//--
+Clase 10
+Cargue al sistema JWT, le cargue el secret que es con el cual realizo la firma, y tambien cargue el header,
+y el payload. Creo el token del ususario con todos estos datos, y luego le envio el token creado para que el ususario me lo vuelva a enviar.
+
+//--
+
+//--
+Clase 11
+Con el envio del token cuando el usuario va a la ruta auth/login, es con lo que luego el servidor trabaja. 
+Cuando quiere crear el cliente una nueva categoria, el backend le dice "okey, dame los datos que quieres cargar y tambien el token que tienes, yo te lo envie cuando hiciste el login. Pasame ese token, lo valido y si esta okey, te dejo generar la nueva categoria"
+
+
+ APUNTES GPT 
+ Sí, has entendido correctamente cómo funciona Passport y su método `passport.authenticate()` en combinación con las estrategias de autenticación.
+
+Cuando utilizas `passport.authenticate()` en tus rutas o controladores, Passport automatiza gran parte del proceso de autenticación por ti. A continuación, te describo el flujo general:
+
+1. Cuando se ejecuta `passport.authenticate()`, Passport comienza a procesar la autenticación según la estrategia especificada.
+
+2. Passport llama a la estrategia que corresponde (en este caso, JWT) para manejar la autenticación. La estrategia realiza la validación necesaria, como verificar la firma del token y decodificar su contenido.
+
+3. Si la validación es exitosa, la estrategia llama a la función `done` con los datos relevantes (por ejemplo, el payload del token) como argumento.
+
+4. Passport toma esos datos y coloca la información relevante (como el usuario autenticado) en el objeto `req` (en `req.user`).
+
+5. Una vez que la autenticación es exitosa, la ejecución continúa con el siguiente middleware o controlador en la cadena.
+
+6. Los middleware o controladores posteriores pueden acceder a los datos del usuario autenticado a través de `req.user` y utilizar esta información según sea necesario.
+
+7. Si la autenticación falla (por ejemplo, el token no es válido), Passport responde automáticamente con un error de autenticación sin continuar con el siguiente middleware o controlador.
+
+Este flujo de trabajo simplifica significativamente la gestión de la autenticación y te permite concentrarte en la lógica específica de tu aplicación. Passport se encarga de la validación y la interacción con las estrategias de autenticación, permitiéndote implementar fácilmente varios métodos de autenticación en tu aplicación.
+//--
