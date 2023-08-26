@@ -390,3 +390,14 @@ Lestoo...
 //--
 
 
+
+
+//--
+Firmar y verificar tokens
+9/20
+
+Instalacion de JWT - biblioteca para generar tokens, desde el lado del servidor.
+Se envia el token al cliente y este espera el retorno del token para verificar la identidad.
+
+
+//--
