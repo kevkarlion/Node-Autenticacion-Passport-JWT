@@ -4,12 +4,14 @@ const CategoryService = require('./../services/category.service');
 const validatorHandler = require('./../middlewares/validator.handler');
 const { createCategorySchema, updateCategorySchema, getCategorySchema } = require('./../schemas/category.schema');
 const passport = require('passport');
+const { checkAdminRole, checkRoles } = require('../middlewares/auth.handler')
 
 
 const router = express.Router();
 const service = new CategoryService();
 
-router.get('/', async (req, res, next) => {
+router.get('/',
+async (req, res, next) => {
   try {
     const categories = await service.find();
     res.json(categories);
@@ -19,6 +21,7 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/:id',
+checkRoles('admin', 'seller', 'customer'),
   validatorHandler(getCategorySchema, 'params'),
   async (req, res, next) => {
     try {
@@ -32,10 +35,20 @@ router.get('/:id',
 );
 
 router.post('/',
+
+  //Si esta bien la autenticacion del token
+  //en el payload vienen los roles.
   passport.authenticate('jwt', {session: false}),
+
+
+  //Necesitamos crear una manera de hacer
+  //mas mantenible y limpio el codigo
+  //entonces a check lo vamos a modificar
+  checkRoles('admin', 'seller'),
   validatorHandler(createCategorySchema, 'body'),
   async (req, res, next) => {
     try {
+
       const body = req.body;
       const rta = await service.create(body);
       res.status(201).json(rta);
@@ -61,6 +74,7 @@ router.patch('/:id',
 );
 
 router.delete('/:id',
+checkRoles('admin'),
   validatorHandler(getCategorySchema, 'params'),
   async (req, res, next) => {
     try {

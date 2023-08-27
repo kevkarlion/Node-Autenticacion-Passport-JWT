@@ -11,6 +11,8 @@ const options = {
 
 //Con el token y el secret, el jwt genera el payload
 const jwtStrategy = new Strategy(options, (payload, done) =>{
+
+  //el payload queda alojado en el req.user
   return done(null, payload);
 });
 

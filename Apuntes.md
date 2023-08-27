@@ -436,3 +436,50 @@ Cuando utilizas `passport.authenticate()` en tus rutas o controladores, Passport
 
 Este flujo de trabajo simplifica significativamente la gestión de la autenticación y te permite concentrarte en la lógica específica de tu aplicación. Passport se encarga de la validación y la interacción con las estrategias de autenticación, permitiéndote implementar fácilmente varios métodos de autenticación en tu aplicación.
 //--
+
+
+//--
+Control de roles
+12/20
+
+Establecemos un moddleware para corroborar los roles. Estos se encuentran en el payload del token. Dependiendo del role que posea, podra o no generar cambios en los endpoints.
+
+Cree estas 2 funciones 
+
+
+function checkAdminRole(req, res, next){
+  console.log(req.user);
+  const user = req.user;
+  if(user.role === 'admin'){
+    next();
+  }else {
+    next(boom.unauthorized());
+  };
+};
+
+//los 3 puntos marcan que ya convierte en un array cada
+//uno de los argumentos que pasen por aca.
+//No es necesario enviar en formato array.
+function checkRoles(...roles){
+  return (req, res, next) =>{
+    const user = req.user;
+
+    //chequeo que este incluido
+    //el role en los parametros
+    //que tengo en el usuario,
+    //desde su payload.
+    //si esta, es xq tiene permisos
+    if(roles.includes(user.role)){
+      next();
+    }else {
+      next(boom.unauthorized());
+    };
+  }
+
+};
+
+
+la 2 funcion valida segun el tipo de role para poder generar cambios segun el endpoint
+
+
+//--
