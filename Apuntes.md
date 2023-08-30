@@ -499,5 +499,7 @@ Podemos trabajar con una sesion de un usuario, con refresh token, esto es un tok
 Se puede almacenar la informacion en cookies o el LocalStorage
 
 
-
 //--
+
+
+
