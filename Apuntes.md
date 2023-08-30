@@ -488,3 +488,16 @@ la 2 funcion valida segun el tipo de role para poder generar cambios segun el en
 
 
 //--
+
+
+//--
+
+
+Manejo de la autenticación desde el cliente
+14/20
+Podemos trabajar con una sesion de un usuario, con refresh token, esto es un token que se envia en automatico cada 15 o 20 min de manera automatica. Esto permite que un usuario no este saliendo de su sesion y volviendo a entrar usando 1 token, sino que el refresh token genera este token automatico para el cliente y puede estar sin que la sesion expire xq haya expirado su token.
+Se puede almacenar la informacion en cookies o el LocalStorage
+
+
+
+//--
