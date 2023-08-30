@@ -40,7 +40,6 @@ router.post('/',
   //en el payload vienen los roles.
   passport.authenticate('jwt', {session: false}),
 
-
   //Necesitamos crear una manera de hacer
   //mas mantenible y limpio el codigo
   //entonces a check lo vamos a modificar

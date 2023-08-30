@@ -1,10 +1,17 @@
 const boom = require('@hapi/boom');
-const {config } = require('../config/config');
+const { config } = require('../config/config');
 
 
-//Leo los datos que recibo desde la req.headers.
-//Compruebo que coincida con la variable de entorno que
-//configure, con su key correspondiente.
+
+/**
+ *Leo los datos que recibo desde la req.headers.
+  Compruebo que coincida con la variable de entorno que
+  configure, con su key correspondiente.
+ */
+/**
+ * checkApi la uso en el index principal
+ * en una ruta llamada app.get('/nueva-ruta')
+ */
 function checkApiKey (req, res, next) {
   const apiKey = req.headers['api'];
   if( apiKey === config.apiKey ){
@@ -23,6 +30,7 @@ function checkAdminRole(req, res, next){
     next(boom.unauthorized());
   };
 };
+
 
 function checkRoles(...roles){
   return (req, res, next) =>{

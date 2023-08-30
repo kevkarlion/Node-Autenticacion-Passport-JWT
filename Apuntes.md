@@ -366,7 +366,12 @@ Recuerda que las opciones específicas del dialecto pueden variar según la base
 
 
 
-//-- Autenticacion y Autorizacion Curso 2/3 de Node
+//-- 
+Clase 4
+
+El caso de las apiKey sirve para enviar filtrar peticiones. Usamos los headers de las peticiones, request. Si al procesar la request, estan las apiKey's en los headers de dichas peticiones, entonces le otorgo los permisos para poder realizar las operaciones. 
+
+Autenticacion y Autorizacion Curso 2/3 de Node
 
   Middleware de verificación
 

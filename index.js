@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 //Agregue un checkApiKey para validar
 //los ingresos a ciertos endpoints.
 //Uso de middlewares, que grande papa
-app.get('/nueva-ruta', checkApiKey ,(req, res) => {
+app.get('/nueva-ruta', checkApiKey, (req, res) => {
   res.send('Hola, soy una nueva ruta');
 });
 
@@ -47,5 +47,5 @@ app.use(errorHandler);
 
 
 app.listen(port, () => {
-  console.log('Mi port' +  port);
+  console.log('Mi port' + port);
 });
