@@ -502,4 +502,13 @@ Se puede almacenar la informacion en cookies o el LocalStorage
 //--
 
 
+//--
+Cómo enviar emails con Node.js
+15/20
+La idea base de esta libreria, es para poder usar el correo de recuperacion de password en caso de que el usuario haya olvidado el mismo.
+Usando la libreria nodemailer, copiamos el schema que esta en la pagina de nodemailer, para luego usar el servidor smtp de gmail. Cambiamos algunas configuraciones, como los datos del remitente, configuramos puerto (ya viene listo, pero se chequea) y datos del destinatario.
+Asi es como funciona a grandes rasgos.
+
+
+//--
 
