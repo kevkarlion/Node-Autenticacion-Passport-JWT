@@ -57,7 +57,7 @@ class UserService {
   }
 
   async findByEmail(email) {
-    //le indico a findOne, que
+    //Le indico a findOne, que
     //busque la fila que contenga el
     //email indicado, con el where
     const rta = await models.User.findOne({
@@ -75,11 +75,9 @@ class UserService {
   }
 
   async update(id, changes) {
-
     const user = await this.findOne(id);
     const rta = await user.update(changes);
     return rta;
-
   }
 
   async delete(id) {
