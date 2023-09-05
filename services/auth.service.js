@@ -50,7 +50,7 @@ class AuthService {
       throw boom.unauthorized();
     }
 
-    //creo un token
+    //creo un payload
     const payload = {
       sub: user.id,
     };
@@ -113,13 +113,16 @@ class AuthService {
   }
 
 
-  async changePassword(token, newPassword){
+  async changePassword({ token, newPassword }){
     try {
+      console.log("Token recibido:", token);
+      console.log("NewPassword recibido:", newPassword);
       const payload = jwt.verify(token, config.jwtSecret);
       const user = await service.findOne(payload.sub);
+      console.log("Token de verificacion:" );
       if( user.recoveryToken !== token ){
         throw boom.unauthorized();
-      }
+      };
       const hash = await bcrypt.hash(newPassword, 10);
       await service.update(user.id, { recoveryToken: null, password: hash });
       return { message: 'Password changed'};
